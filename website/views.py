@@ -8,6 +8,18 @@ from models import Page
 def index(request):
     foo = "This is a test"
     
-    pages = Page.objects.all()
-    return render(request,'index.html',{"test":foo,"pages":pages},context_instance=RequestContext(request))
+    return render(request,'index.html',{"test":foo},context_instance=RequestContext(request))
 
+
+def list_pages(request):
+    pages = Page.objects.all()
+    
+    return render(request,"pages.html",{"pages":pages},context_instance=RequestContext(request))
+
+def page_detail(request,Page):
+    page = Page.object.get(name=Page)
+    
+    return render(request,"page_detail.html",{"page":page},context_instance=RequestContext(request))
+
+def search_page(request):
+    return render(request,"search.html",context_instance=RequestContext(request))
